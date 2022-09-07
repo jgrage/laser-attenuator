@@ -11,6 +11,11 @@ extern char COMMAND_BUFFER[BUFFER_LEN];
 extern char SEND_BUFFER[BUFFER_LEN];
 
 extern filter filter1;
+extern filter filter2;
+extern filter filter3;
+extern filter filter4;
+extern filter filter5;
+extern filter filter6;
 
 scpi_error_t identify(struct scpi_parser_context* context, struct scpi_token* command);
 scpi_error_t reset(struct scpi_parser_context* context, struct scpi_token* command);
@@ -19,4 +24,24 @@ scpi_error_t disconnect(struct scpi_parser_context* context, struct scpi_token* 
 scpi_error_t filter1_insert(struct scpi_parser_context* context, struct scpi_token* command);
 scpi_error_t filter1_remove(struct scpi_parser_context* context, struct scpi_token* command);
 scpi_error_t filter1_getstate(struct scpi_parser_context* context, struct scpi_token* command);
+
+scpi_error_t filter2_insert(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter2_remove(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter2_getstate(struct scpi_parser_context* context, struct scpi_token* command);
+
+scpi_error_t filter3_insert(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter3_remove(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter3_getstate(struct scpi_parser_context* context, struct scpi_token* command);
+
+scpi_error_t filter4_insert(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter4_remove(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter4_getstate(struct scpi_parser_context* context, struct scpi_token* command);
+
+scpi_error_t filter5_insert(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter5_remove(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter5_getstate(struct scpi_parser_context* context, struct scpi_token* command);
+
+scpi_error_t filter6_insert(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter6_remove(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t filter6_getstate(struct scpi_parser_context* context, struct scpi_token* command);
 #endif
