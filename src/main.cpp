@@ -1,7 +1,6 @@
 /* main.cpp
  * Jonas
  */
- 
 #include <avr/wdt.h>
 #include <Ethernet.h>
 #include <Controllino.h>
@@ -51,7 +50,10 @@ void setup(void){
     TCCR1B |= _BV(WGM12);               // CTC mode
     TCCR1B |= _BV(CS12) | _BV(CS10);    // set prescaler to 1024
     TIMSK1 |= _BV(OCIE1B);              // enable compare match interrupt
+    
     pinMode(CONTROLLINO_D8, OUTPUT);
+    pinMode(LED1_PIN , OUTPUT);
+    pinMode(LED2_PIN , OUTPUT);
     
     // Initialize and connect the components
     filter1.connect(CONTROLLINO_D0, CONTROLLINO_A0, CONTROLLINO_A1);
@@ -103,6 +105,14 @@ void setup(void){
     scpi_register_command(f6, SCPI_CL_CHILD, "INSERT", 6, "IN", 2, filter6_insert);
     scpi_register_command(f6, SCPI_CL_CHILD, "REMOVE", 6, "RM", 2, filter6_remove);
     scpi_register_command(f6, SCPI_CL_CHILD, "STATE?", 6, "ST?", 3, filter6_getstate);
+    
+    struct scpi_command* led1;
+    led1 = scpi_register_command(ctx.command_tree, SCPI_CL_CHILD, "LED1", 4, "L1", 2, NULL);
+    scpi_register_command(led1, SCPI_CL_CHILD, "SET", 3, "SET", 3, set_led1);
+    
+    struct scpi_command* led2;
+    led2 = scpi_register_command(ctx.command_tree, SCPI_CL_CHILD, "LED1", 4, "L1", 2, NULL);
+    scpi_register_command(led2, SCPI_CL_CHILD, "SET", 3, "SET", 3, set_led2);
     
     // Start server and enable interrupts
     server.begin();

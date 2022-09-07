@@ -3,6 +3,9 @@
 
 #define BUFFER_LEN 64
 
+#define LED1_PIN CONTROLLINO_D14
+#define LED2_PIN CONTROLLINO_D15
+
 extern volatile uint8_t reset_flag;
 extern volatile uint8_t disconnect_flag;
 
@@ -44,4 +47,7 @@ scpi_error_t filter5_getstate(struct scpi_parser_context* context, struct scpi_t
 scpi_error_t filter6_insert(struct scpi_parser_context* context, struct scpi_token* command);
 scpi_error_t filter6_remove(struct scpi_parser_context* context, struct scpi_token* command);
 scpi_error_t filter6_getstate(struct scpi_parser_context* context, struct scpi_token* command);
+
+scpi_error_t set_led1(struct scpi_parser_context* context, struct scpi_token* command);
+scpi_error_t set_led2(struct scpi_parser_context* context, struct scpi_token* command);
 #endif

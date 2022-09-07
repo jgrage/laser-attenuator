@@ -1,3 +1,4 @@
+#include <Controllino.h>
 #include <scpiparser.h>
 #include <filter.hpp>
 #include "scpi_commands.hpp"
@@ -173,5 +174,67 @@ scpi_error_t filter6_getstate(struct scpi_parser_context* context, struct scpi_t
 {
     scpi_free_tokens(command);
     RESPONSE_LEN = snprintf(SEND_BUFFER, BUFFER_LEN, "%d\n", filter6.state);
+    return SCPI_SUCCESS;
+}
+
+
+// led1
+scpi_error_t set_led1(struct scpi_parser_context* context, struct scpi_token* command)
+{
+    struct scpi_token* args;
+    struct scpi_numeric output_numeric;
+    uint8_t output_value;
+
+    args = command;
+
+    while(args != NULL && args->type == 0){
+        args = args->next;
+    }
+
+    output_numeric = scpi_parse_numeric(args->value, args->length, 0, 0, 100);
+    
+    if(output_numeric.length == 0){
+        output_value = (uint8_t)constrain(output_numeric.value / 100.0f * 256.0f, 0, 255);
+        analogWrite(LED1_PIN, output_value);
+        RESPONSE_LEN = 0;
+    }
+    
+    else{
+        RESPONSE_LEN = snprintf(SEND_BUFFER, BUFFER_LEN, "%s\n", "Command error;Invalid unit");
+    }
+
+    
+    scpi_free_tokens(command);
+    return SCPI_SUCCESS;
+}
+
+
+// led2
+scpi_error_t set_led2(struct scpi_parser_context* context, struct scpi_token* command)
+{
+    struct scpi_token* args;
+    struct scpi_numeric output_numeric;
+    uint8_t output_value;
+
+    args = command;
+
+    while(args != NULL && args->type == 0){
+        args = args->next;
+    }
+
+    output_numeric = scpi_parse_numeric(args->value, args->length, 0, 0, 100);
+    
+    if(output_numeric.length == 0){
+        output_value = (uint8_t)constrain(output_numeric.value / 100.0f * 256.0f, 0, 255);
+        analogWrite(LED2_PIN, output_value);
+        RESPONSE_LEN = 0;
+    }
+    
+    else{
+        RESPONSE_LEN = snprintf(SEND_BUFFER, BUFFER_LEN, "%s\n", "Command error;Invalid unit");
+    }
+
+    
+    scpi_free_tokens(command);
     return SCPI_SUCCESS;
 }
