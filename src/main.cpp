@@ -111,7 +111,7 @@ void setup(void){
     scpi_register_command(led1, SCPI_CL_CHILD, "SET", 3, "SET", 3, set_led1);
     
     struct scpi_command* led2;
-    led2 = scpi_register_command(ctx.command_tree, SCPI_CL_CHILD, "LED1", 4, "L1", 2, NULL);
+    led2 = scpi_register_command(ctx.command_tree, SCPI_CL_CHILD, "LED2", 4, "L2", 2, NULL);
     scpi_register_command(led2, SCPI_CL_CHILD, "SET", 3, "SET", 3, set_led2);
     
     // Start server and enable interrupts
